@@ -90,7 +90,9 @@ export class bookResolver {
   async getAllBooks(): Promise<Book[]> {
     //aqui irian los filtros
     try {
-      return await this.bookRepository.find({ relations: ["author"] });
+      return await this.bookRepository.find({
+        relations: ["author", "author.books"],
+      });
     } catch (error) {
       throw new Error("Error al mostrar los libros");
     }
@@ -102,7 +104,7 @@ export class bookResolver {
   ): Promise<Book | undefined> {
     try {
       const book = await this.bookRepository.findOne(input.id, {
-        relations: ["author"],
+        relations: ["author", "author.books"],
       });
       if (!book) {
         const error = new Error();
@@ -136,10 +138,13 @@ export class bookResolver {
     @Arg("input", () => BookIdInput) input: BookIdInput
   ): Promise<Boolean> {
     try {
-      await this.bookRepository.delete(input.id);
+      const result = await this.bookRepository.delete(input.id); //devuelve un objeto con items, las filas afectadas y el contador de objetos afectados
+      if (result.affected === 0 || !input.id) {
+        throw new Error("Book does not exist");
+      }
       return true;
     } catch (e) {
-      throw new Error("Error on delete method");
+      throw e//new Error("Error on delete method");
     }
   }
 
