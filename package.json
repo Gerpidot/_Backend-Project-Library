@@ -1,18 +1,24 @@
 {
   "name": "proyectoialab",
   "version": "1.0.0",
-  "description": "practica BackEnd",
+  "description": "Práctica BackEnd",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon src/main.ts --exec ts-node"
+    "dev": "nodemon src/main.ts --exec ts-node",
+    "start": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/main.ts"
   },
   "keywords": [
     "backend",
-    "learning"
+    "learning",
+    "nodejs",
+    "express",
+    "apollo-server-express",
+    "typeorm"
   ],
   "author": "Paydot",
-  "license": "ISC",
+  "license": "",
   "dependencies": {
+    "@sendgrid/mail": "7.6.2",
     "apollo-server-express": "^2.19.2",
     "bcryptjs": "^2.4.3",
     "class-validator": "^0.13.2",
@@ -20,8 +26,12 @@
     "express": "^4.17.1",
     "graphql": "^15.3.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.2",
+    "node-cron": "^3.0.0",
+    "nodemon": "^2.0.15",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.7.0",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.31"
   },
@@ -30,8 +40,6 @@
     "@types/express": "^4.17.11",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.14.25",
-    "nodemon": "^2.0.7",
-    "ts-node": "^9.1.1",
     "typescript": "^4.1.5"
   }
 }

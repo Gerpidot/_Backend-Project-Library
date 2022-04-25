@@ -3,7 +3,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
-  OneToMany,
+  
 } from "typeorm";
 
 import { Field, ObjectType } from "type-graphql";
@@ -23,11 +23,19 @@ export class User {
   @Column()
   email!: string;
 
-  @Field(()=>String)
+  @Field(() => String)
   @Column()
-  password!: string
+  password!: string;
 
   @Field(() => String)
   @CreateDateColumn({ type: "timestamp" })
   createdAt!: string;
+
+  @Field()
+  @Column({ type: "boolean", default: false })
+  isActive!: boolean;
+
+  @Field(() => String)
+  @Column({ default: 0 })
+  confirmationCode!: string;
 }

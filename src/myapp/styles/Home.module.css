@@ -1,0 +1,42 @@
+/*.formulario {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 400px;
+  
+  margin: auto;
+  border: 5px solid gray;
+  border-radius: 10px;
+  background-color: aquamarine;
+}
+.formulario input {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  
+  border: 1px solid black;
+  border-radius: 20px;
+  margin: 0px;
+  padding: 4px;
+  text-align: left;
+}
+
+Formik {
+  display: flexbox;
+}
+
+.error{
+  margin: 0%;
+  padding: 0%;
+}
+
+.inputContainer{
+  height:80px;
+}*/
+
+label {
+  text-align: right;
+  text-decoration: underline;
+  width: 600px;
+}

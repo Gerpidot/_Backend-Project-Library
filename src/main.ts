@@ -1,11 +1,15 @@
 import { startServer } from "./server";
 import { connect } from "./config/typeorm";
+import dotenv from "dotenv";
+import { enviroment } from "./config/enviroment";
 
 async function main() {
+  dotenv.config();
+
   connect();
-  const port: number = 3001; //por ahora lo pusimos aqui, pero va en las variables de entorno
+  const port: number = Number(enviroment.PORT); 
   const app = await startServer();
-  app.listen(port);
+  app.listen(port); //si quisiera hacerlo en la lan despues del port, coloco el ipv4
   console.log("app is working at port " + port);
 }
 

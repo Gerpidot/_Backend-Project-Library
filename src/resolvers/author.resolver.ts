@@ -1,37 +1,12 @@
-import {
-  Arg,
-  Args,
-  Field,
-  InputType,
-  Mutation,
-  Query,
-  Resolver,
-} from "type-graphql";
+import { Arg, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
 import { Author } from "../entity/author.entity";
 import { getRepository, Repository } from "typeorm";
-import { Length } from "class-validator";
-
-@InputType()
-class AuthorInput {
-  @Field()
-  @Length(3, 64)
-  fullName!: string;
-}
-@InputType()
-class AuthorIdInput {
-  @Field(() => Number)
-  id!: number;
-}
-
-@InputType()
-class AuthorUpdateInput {
-  @Field(() => Number)
-  id!: number;
-
-  @Field(() => String)
-  @Length(3, 64)
-  fullName?: string;
-}
+import {
+  AuthorIdInput,
+  AuthorInput,
+  AuthorUpdateInput,
+} from "../DTO/author.input.type";
+import { isAuth } from "../middlewares/auth.middleware";
 
 @Resolver()
 export class authorResolver {
@@ -42,6 +17,7 @@ export class authorResolver {
   }
 
   @Mutation(() => Author)
+  @UseMiddleware(isAuth)
   async createAuthor(
     @Arg("input", () => AuthorInput) input: AuthorInput
   ): Promise<Author | undefined> {
@@ -53,23 +29,29 @@ export class authorResolver {
         createAuthor.identifiers[0].id
       );
       return result;
-    } catch (error) {
-      console.log("Error en author resolver", error);
-    }
+    } catch (error) {}
   }
 
   @Query(() => [Author])
+  @UseMiddleware(isAuth)
   async getAllAuthor(): Promise<Author[]> {
-    return await this.authorRepository.find({ relations: ["Books"] });
+    try {
+      return await this.authorRepository.find({ relations: ["books"] });
+    } catch (e) {
+      throw e;
+    }
   }
 
   @Query(() => Author)
+  @UseMiddleware(isAuth)
   async getOneAuthor(
     @Arg("input", () => AuthorIdInput) input: AuthorIdInput
   ): Promise<Author | undefined> {
-    const author = await this.authorRepository.findOne(input.id);
-
     try {
+      const author = await this.authorRepository.findOne(input.id, {
+        relations: ["books"],
+      });
+
       if (!author) {
         const error = new Error();
         error.message = "Author does not exist";
@@ -77,28 +59,33 @@ export class authorResolver {
       }
       return author;
     } catch (e) {
-      throw new Error("El autor no existe man");
+      throw e;
     }
   }
 
   @Mutation(() => Author)
+  @UseMiddleware(isAuth)
   async updateAuthorByID(
     @Arg("input", () => AuthorUpdateInput) input: AuthorUpdateInput
   ): Promise<Author | undefined> {
-    const authorExist = await this.authorRepository.findOne(input.id);
+    try {
+      const authorExist = await this.authorRepository.findOne(input.id);
 
-    if (!authorExist) {
-      throw new Error("Author does not exist");
+      if (!authorExist) {
+        throw new Error("Author does not exist");
+      }
+
+      return await this.authorRepository.save({
+        id: input.id,
+        fullName: input.fullName,
+      });
+    } catch (e) {
+      throw e;
     }
-
-    return await this.authorRepository.save({
-      //save actualiza si existe o crea si no existes, por eso el if antes para evitar la creacion de nuevos datos por error
-      id: input.id,
-      fullName: input.fullName,
-    });
   }
 
   @Mutation(() => Boolean)
+  @UseMiddleware(isAuth)
   async deleteAuthorByID(
     @Arg("input", () => AuthorIdInput) input: AuthorIdInput
   ): Promise<Boolean> {

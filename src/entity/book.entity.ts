@@ -26,4 +26,16 @@ export class Book {
   @Field()
   @CreateDateColumn({ type: "timestamp" })
   createdAt!: string;
+
+  @Field()
+  @CreateDateColumn({ type: "timestamp" })
+  borrowedAt!: string;
+
+  @Field()
+  @Column({ type: "boolean", default: false })
+  isBorrowed!: boolean;
+
+  @Field()
+  @Column({ default: "atLibrary" })
+  borrowedTo!: string;
 }
