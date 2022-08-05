@@ -2,10 +2,11 @@
   "name": "proyectoialab",
   "version": "1.0.0",
   "description": "Práctica BackEnd",
-  "main": "index.js",
+  "main": "./src/main.ts",
+  
   "scripts": {
-    "dev": "nodemon src/main.ts --exec ts-node",
-    "start": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/main.ts"
+    
+    "start":"node src/main" 
   },
   "keywords": [
     "backend",
@@ -41,5 +42,8 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.14.25",
     "typescript": "^4.1.5"
-  }
+  },
+  "engines": {
+    "node": "16.14.0"
+    }
 }
