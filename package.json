@@ -4,8 +4,7 @@
   "description": "Práctica BackEnd",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/main.ts --exec ts-node",
-    "start": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/main.ts"
+     "start":"node src/main" 
   },
   "keywords": [
     "backend",
