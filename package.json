@@ -5,8 +5,8 @@
   "main": "./src/main.ts",
   
   "scripts": {
-    
-    "start":"node src/main" 
+    "dev": "nodemon src/main.ts --exec ts-node",
+    "start": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/main.ts"
   },
   "keywords": [
     "backend",
