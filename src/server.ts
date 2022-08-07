@@ -43,6 +43,7 @@ export async function startServer() {
     path: "/graphql",
   });
 
+  app.get("/", (req,res)=>{res.send("Hello Word")})//prubas del deploy borrar
   //schedule task
   weeklySummary;
   dailyControl;
