@@ -16,6 +16,11 @@ export async function startServer() {
       resolvers: [bookResolver, authorResolver, authResolver],
     }),
     context: ({ req, res }) => ({ req, res }),
+    //borrar los 4 siguiente
+    debug: true,
+  tracing: true,
+  introspection: true,
+  playground: true
   });
 
   await apolloServer.start();
