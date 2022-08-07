@@ -16,7 +16,7 @@ export async function startServer() {
       resolvers: [bookResolver, authorResolver, authResolver],
     }),
     context: ({ req, res }) => ({ req, res }),
-    //borrar los 4 siguiente
+    //borrar los 4 siguiente o si no hacen que la ruta graphql sea visible en produccion
     debug: true,
   tracing: true,
   introspection: true,
