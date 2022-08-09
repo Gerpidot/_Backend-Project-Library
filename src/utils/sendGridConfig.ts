@@ -16,7 +16,7 @@ export const sendMailAtRegister = (
 
   const msg = {
     to: `${email}`,
-    from: "default@mail", // Change to your verified sender
+    from: enviroment.SENDGRID_REGISTERED_EMAIL, // Change to your verified sender
     subject: "Biblioteca OnLine -Datos de acceso",
     text: "Datos de acceso",
     html: `<strong><pre>Hola ${fullName},
