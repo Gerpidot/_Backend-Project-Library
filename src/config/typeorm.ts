@@ -11,7 +11,7 @@ export async function connect() {
     //password: enviroment.DB_PASSWORD,
     //database: enviroment.DB_DATABASE,
     extra:{ssl:true},
-    entities: [path.join(__dirname, "../entity/**/**.ts")],
+    //entities: [path.join(__dirname, "../entity/**/**.ts")],
     synchronize: true,
     
     
