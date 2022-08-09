@@ -27,7 +27,7 @@ export const sendMailAtRegister = (
         contraseña: ${pass} 
       
         Para validar tus datos haz click en el siguiente link
-       <a href=http://localhost:4000/src/confirmation?token=${confirmation}&email=${email}><strong>Activar</strong></a>
+       <a href=${enviroment.SV_HOST}/src/confirmation?token=${confirmation}&email=${email}><strong>Activar</strong></a>
       
                                     Disfruta del sitio.
                                     
