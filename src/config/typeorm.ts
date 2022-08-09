@@ -13,7 +13,7 @@ export async function connect() {
     //extra:{ssl:true},
     entities: [path.join(__dirname, "../entity/**/**.ts")],
     synchronize: true,
-    
+    ssl: { rejectUnauthorized: false }
     
   });
   
