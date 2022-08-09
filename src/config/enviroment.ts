@@ -12,4 +12,5 @@ export const enviroment = {
   JWT_SECRET: process.env.JWT_SECRET || "Default",
   SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   SV_HOST:process.env.SV_HOST,
+  SENDGRID_REGISTERED_EMAIL: process.env.SENDGRID_REGISTERED_EMAIL,
 };
