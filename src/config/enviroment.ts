@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 export const enviroment = {
   PORT: process.env.PORT,
-  DB_HOST: process.env.DB_HOST,
+  DB_HOST: "ec2-50-19-255-190.compute-1.amazonaws.com",
   DB_PORT: process.env.DB_PORT,
   DB_USERNAME: process.env.DB_USERNAME,
   DB_PASSWORD: process.env.DB_PASSWORD,
