@@ -53,7 +53,7 @@ export const sendMailAtForgot = (
 ) => {
   const msg = {
     to: `${email}`, // Change to your recipient
-    from: "example@admin", // Change to your verified sender
+    from: enviroment.SENDGRID_REGISTERED_EMAIL, // Change to your verified sender
     subject: "Biblioteca OnLine -Recuperar contraseña",
     text: "Datos de acceso",
     html: `<strong><pre>Hola ${fullName},
@@ -84,8 +84,8 @@ export const sendMailAtForgot = (
 
 export const sendMailToAdmin = (books: Book[], borrowedBooks: any) => {
   const msg = {
-    to: "example@admin", //admin email
-    from: "example@admin",
+    to: enviroment.SENDGRID_REGISTERED_EMAIL, //admin email
+    from: enviroment.SENDGRID_REGISTERED_EMAIL,
     subject: "Biblioteca OnLine - Weekly Summary",
     text: "Datos de acceso",
     html: `<strong><pre>Hola Mr. Admin,
@@ -170,7 +170,7 @@ export const sendMailToAdmin = (books: Book[], borrowedBooks: any) => {
 export const sendMailForOwedBooks = (book: any) => {
   const msg = {
     to: `${book.book.borrowedTo}`,
-    from: "example@admin",
+    from: enviroment.SENDGRID_REGISTERED_EMAIL,
     subject: "Biblioteca OnLine -Libro Adeudado",
     text: "Libro Adeudado",
     html: `<strong><pre>Hola usuario,
