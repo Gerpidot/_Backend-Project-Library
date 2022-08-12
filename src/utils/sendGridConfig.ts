@@ -16,7 +16,7 @@ export const sendMailAtRegister = (
 
   const msg = {
     to: `${email}`,
-    from: enviroment.SENDGRID_REGISTERED_EMAIL, // Change to your verified sender
+    from: enviroment.SENDGRID_REGISTERED_EMAIL, 
     subject: "Biblioteca OnLine -Datos de acceso",
     text: "Datos de acceso",
     html: `<strong><pre>Hola ${fullName},
@@ -52,7 +52,7 @@ export const sendMailAtForgot = (
   fullName: string
 ) => {
   const msg = {
-    to: `${email}`, // Change to your recipient
+    to: `${email}`, 
     from: enviroment.SENDGRID_REGISTERED_EMAIL, // Change to your verified sender
     subject: "Biblioteca OnLine -Recuperar contraseña",
     text: "Datos de acceso",
