@@ -110,7 +110,7 @@ export class authResolver {
       await this.authRepository.update(userFound.id, {
         password: hashNewPassword,
       });
-      sendMailAtForgot(userFound.email, newPassword, userFound.fullName);
+      sendMailAtForgot(userFound.email, newPassword, userFound.fullName,enviroment.SENDGRID_REGISTERED_EMAIL);
 
       return await this.authRepository.findOne(userFound.id);
     } catch (e) {
