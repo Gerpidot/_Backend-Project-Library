@@ -53,10 +53,11 @@ export const sendMailAtForgot = (
 ) => {
   const msg = {
     to: `${email}`,
-    from: enviroment.SENDGRID_REGISTERED_EMAIL+"", //cxcx Change to your verified sender
+    from: enviroment.SENDGRID_REGISTERED_EMAIL,
     subject: "Biblioteca OnLine -Recuperar contraseña",
     text: "Datos de acceso",
     html: `<strong><pre>Hola ${fullName},
+    
       
       te enviamos una contraseña nueva!! Los datos de acceso son:
                                                                                   
