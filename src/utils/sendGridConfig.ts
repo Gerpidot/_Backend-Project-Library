@@ -16,7 +16,7 @@ export const sendMailAtRegister = (
 
   const msg = {
     to: `${email}`,
-    from: enviroment.SENDGRID_REGISTERED_EMAIL, 
+    from: enviroment.SENDGRID_REGISTERED_EMAIL,
     subject: "Biblioteca OnLine -Datos de acceso",
     text: "Datos de acceso",
     html: `<strong><pre>Hola ${fullName},
@@ -52,7 +52,7 @@ export const sendMailAtForgot = (
   fullName: string
 ) => {
   const msg = {
-    to: `${email}`, 
+    to: `${email}`,
     from: `${enviroment.SENDGRID_REGISTERED_EMAIL}`, //cxcx Change to your verified sender
     subject: "Biblioteca OnLine -Recuperar contraseña",
     text: "Datos de acceso",
@@ -79,6 +79,8 @@ export const sendMailAtForgot = (
     })
     .catch((error: Error) => {
       console.error(error);
+      console.log(enviroment.SENDGRID_REGISTERED_EMAIL + "este es el email");
+      console.log(typeof enviroment.SENDGRID_REGISTERED_EMAIL);
     });
 };
 
