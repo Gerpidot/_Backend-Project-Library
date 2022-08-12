@@ -5,7 +5,7 @@ import { Book } from "../entity/book.entity";
 
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(enviroment.SENDGRID_API_KEY);
-const mail: string = enviroment.SENDGRID_REGISTERED_EMAIL;
+
 
 export const sendMailAtRegister = (
   email: string,
@@ -50,7 +50,8 @@ export const sendMailAtRegister = (
 export const sendMailAtForgot = (
   email: string,
   pass: string,
-  fullName: string
+  fullName: string,
+  mail :string
 ) => {
   const msg = {
     to: `${email}`,
