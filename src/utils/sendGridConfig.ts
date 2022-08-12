@@ -6,7 +6,6 @@ import { Book } from "../entity/book.entity";
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(enviroment.SENDGRID_API_KEY);
 
-
 export const sendMailAtRegister = (
   email: string,
   pass: string,
@@ -50,12 +49,11 @@ export const sendMailAtRegister = (
 export const sendMailAtForgot = (
   email: string,
   pass: string,
-  fullName: string,
-  mail :string
+  fullName: string
 ) => {
   const msg = {
     to: `${email}`,
-    from: `${mail}`,
+    from: "gpidote@inidep.edu.ar",
     subject: "Biblioteca OnLine -Recuperar contraseña",
     text: "Datos de acceso",
     html: `<strong><pre>Hola ${fullName},
@@ -82,8 +80,7 @@ export const sendMailAtForgot = (
     })
     .catch((error: Error) => {
       console.error(error);
-      console.log(mail + "este es el email");
-      console.log(typeof(mail));
+      
     });
 };
 
