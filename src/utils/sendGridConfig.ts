@@ -5,6 +5,7 @@ import { Book } from "../entity/book.entity";
 
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(enviroment.SENDGRID_API_KEY);
+const mail: string = enviroment.SENDGRID_REGISTERED_EMAIL;
 
 export const sendMailAtRegister = (
   email: string,
@@ -53,7 +54,7 @@ export const sendMailAtForgot = (
 ) => {
   const msg = {
     to: `${email}`,
-    from: enviroment.SENDGRID_REGISTERED_EMAIL,
+    from: `${mail}`,
     subject: "Biblioteca OnLine -Recuperar contraseña",
     text: "Datos de acceso",
     html: `<strong><pre>Hola ${fullName},
@@ -80,15 +81,15 @@ export const sendMailAtForgot = (
     })
     .catch((error: Error) => {
       console.error(error);
-      console.log(enviroment.SENDGRID_REGISTERED_EMAIL + "este es el email");
-      console.log(typeof enviroment.SENDGRID_REGISTERED_EMAIL);
+      console.log(mail + "este es el email");
+      console.log(typeof(mail));
     });
 };
 
 export const sendMailToAdmin = (books: Book[], borrowedBooks: any) => {
   const msg = {
-    to: enviroment.SENDGRID_REGISTERED_EMAIL, //admin email
-    from: enviroment.SENDGRID_REGISTERED_EMAIL,
+    to: "gpidote@inidep.edu.ar", //admin email
+    from: "gpidote@inidep.edu.ar",
     subject: "Biblioteca OnLine - Weekly Summary",
     text: "Datos de acceso",
     html: `<strong><pre>Hola Mr. Admin,
@@ -173,7 +174,7 @@ export const sendMailToAdmin = (books: Book[], borrowedBooks: any) => {
 export const sendMailForOwedBooks = (book: any) => {
   const msg = {
     to: `${book.book.borrowedTo}`,
-    from: enviroment.SENDGRID_REGISTERED_EMAIL,
+    from: "gpidote@inidep.edu.ar",
     subject: "Biblioteca OnLine -Libro Adeudado",
     text: "Libro Adeudado",
     html: `<strong><pre>Hola usuario,
