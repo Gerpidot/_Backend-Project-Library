@@ -53,7 +53,7 @@ export const sendMailAtForgot = (
 ) => {
   const msg = {
     to: `${email}`, 
-    from: `${enviroment.SENDGRID_REGISTERED_EMAIL}`, // Change to your verified sender
+    from: "gpidote@inidep.edu.ar", // Change to your verified sender
     subject: "Biblioteca OnLine -Recuperar contraseña",
     text: "Datos de acceso",
     html: `<strong><pre>Hola ${fullName},
