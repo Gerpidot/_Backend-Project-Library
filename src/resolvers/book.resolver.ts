@@ -3,6 +3,7 @@ import { Arg, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
 import { Book } from "../entity/book.entity";
 import { Author } from "../entity/author.entity";
 import { isAuth } from "../middlewares/auth.middleware";
+import { sendMailAtGiveBackBook, sendMailAtLoanBook } from "../utils/sendGridConfig";
 import {
   BookIdInput,
   BookInput,
@@ -106,11 +107,11 @@ export class bookResolver {
       const allBooks = await this.getAllBooks();
       const result: Book[] = [];
 
-      allBooks.map((book) => {
+      allBooks.filter((book) => {
         if (
           book.title
-            .toLocaleUpperCase()
-            .indexOf(input.title.toLocaleUpperCase()) !== -1
+            .toLocaleUpperCase().match(`\\b${input.title.toLocaleUpperCase()}\\b`)
+           
         ) {
           result.push(book);
         }
@@ -157,6 +158,7 @@ export class bookResolver {
         error.message = "There is not a book with that ID";
         throw error;
       }
+      
       await this.bookRepository.update(
         input.id,
         await this.loanOrReturnABook(input2, input)
@@ -215,7 +217,9 @@ export class bookResolver {
     //si el usuario tiene límite y el libro no fue prestado se puede pedir el libro
     try {
       const _input: TookAndPutBookInput = {};
-      const bookStatusCheck = await this.bookRepository.findOne(inputID.id); //se busca el libro
+      const bookStatusCheck = await this.bookRepository.findOne(inputID.id , {
+        relations: ["author", "author.books"],//lo relaciono para traer el nombre del autor
+      }); //se busca el libro
       //si se pide un libro:
       if (input.isBorrowed) {
         //Se obtiene el número de libros que posee el usuario
@@ -237,6 +241,7 @@ export class bookResolver {
         await this.bookRepository.update(inputID.id, {
           borrowedAt: new Date().toString(),
         }); // se registra la fecha
+        sendMailAtLoanBook(input.borrowedTo || "default",bookStatusCheck)
       }
 
       // se devuelve el libro si isBorrowed es falso
@@ -246,12 +251,19 @@ export class bookResolver {
           error.message = "The book was not borrowed";
           throw error;
         }
+        if(input.borrowedTo!==bookStatusCheck?.borrowedTo){
+          const error =new Error();
+          error.message="The book was not loaned to you"
+          throw error;
+        }
         _input["isBorrowed"] = input.isBorrowed; //isBorrowed pasa a false, se devolvió
         _input["borrowedTo"] = "atLibrary"; // texto default, libro en biblio
         await this.bookRepository.update(inputID.id, {
           borrowedAt: new Date().toString(),
+          //enviar un mail avisando que devolvió el libro
         });
         //fecha en la que se devolvió, si isBorrowed está en false
+        sendMailAtGiveBackBook(input.borrowedTo || "default", bookStatusCheck) 
       }
       return _input;
     } catch (e) {

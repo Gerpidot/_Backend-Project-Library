@@ -80,7 +80,6 @@ export const sendMailAtForgot = (
     })
     .catch((error: Error) => {
       console.error(error);
-      
     });
 };
 
@@ -202,6 +201,76 @@ export const sendMailForOwedBooks = (book: any) => {
     .send(msg)
     .then(() => {
       console.log("Email sent to delayed user");
+    })
+    .catch((error: Error) => {
+      console.error(error);
+    });
+};
+
+export const sendMailAtLoanBook = (email: string, book: any) => {
+  // using Twilio SendGrid's v3 Node.js Library
+
+  const msg = {
+    to: `${email}`,
+    from: enviroment.SENDGRID_REGISTERED_EMAIL,
+    subject: "Biblioteca OnLine -Se te prestó el libro " + book.title,
+    text: "Préstamo",
+    html: `<strong><pre>Hola,
+      
+      Pediste prestado el siguiente libro: ${book.title},
+      
+      del autor ${book.author.fullName}
+                                                                                
+        
+       
+      
+        Recordá que tienes 7 días a partir de este momento para devolverlo
+       
+      
+                                    Disfruta del libro.
+                                    
+                                    
+                                    
+    
+    Si no fuiste tu, responde este email para comunicarte con el administrador</pre> </strong>`,
+  };
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log("Email at loanBook sent");
+    })
+    .catch((error: Error) => {
+      console.error(error);
+    });
+};
+
+export const sendMailAtGiveBackBook = (email: string, book: any) => {
+  // using Twilio SendGrid's v3 Node.js Library
+
+  const msg = {
+    to: `${email}`,
+    from: enviroment.SENDGRID_REGISTERED_EMAIL,
+    subject: "Biblioteca OnLine -Se devolvió el libro " + book.title,
+    text: "Devolución",
+    html: `<strong><pre>Hola,
+      
+      Acabas de devolver el siguiente libro: ${book.title},
+      
+      del autor ${book.author.fullName}
+                                                                                
+        
+       
+      
+        Espero que lo hayas disfrutado
+       
+      
+                                    Saludos.
+                                    </pre> </strong>`,
+  };
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log("Email at GiveBackBook sent");
     })
     .catch((error: Error) => {
       console.error(error);

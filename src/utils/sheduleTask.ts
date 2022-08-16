@@ -1,3 +1,4 @@
+import { assertUnionType } from "graphql";
 import { authResolver } from "../resolvers/auth.resolver";
 import { bookResolver } from "../resolvers/book.resolver";
 import { sendMailForOwedBooks, sendMailToAdmin } from "../utils/sendGridConfig";
@@ -72,3 +73,5 @@ export const weeklySummary = cron.schedule("59 23 * */1 0", async () => {
 export const dailyControl = cron.schedule("59 23 */1 * *", async () => {
   await sendMailForOwedBooksTask();
 });
+
+

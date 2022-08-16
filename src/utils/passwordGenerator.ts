@@ -13,8 +13,6 @@ const generarPassword = () => {
     "^",
     "&",
     "*",
-    "(",
-    ")",
     "_",
     "<",
     ",",
@@ -80,8 +78,10 @@ const generarPassword = () => {
   ];
 
   let index = 0;
-  while (index < 3) {//control para usar 3 may, 3 min y 3 num
-    if (index < 1) {//control para solo usar 1 símbolo
+  while (index < 3) {
+    //control para usar 3 may, 3 min y 3 num
+    if (index < 1) {
+      //control para solo usar 1 símbolo
       password.push(symbols[Math.floor(Math.random() * 30)]);
     }
     password.push(numbers[Math.floor(Math.random() * 10)]);
@@ -89,7 +89,8 @@ const generarPassword = () => {
     password.push(upperCase[Math.floor(Math.random() * 26)]);
     index++;
   }
-  function shuffleArray() {//mezcla el array password
+  function shuffleArray() {
+    //mezcla el array password
     for (var i = password.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var temp = password[i];

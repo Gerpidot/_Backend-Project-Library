@@ -52,5 +52,6 @@ export async function startServer() {
   //schedule task
   weeklySummary;
   dailyControl;
+  
   return app;
 }

@@ -5,7 +5,7 @@ import { enviroment } from "./enviroment";
 export async function connect() {
   await createConnection({
     type: "postgres",
-    url: enviroment.DATABASE_URL,
+    url: enviroment.DATABASE_URL,//toma la url que me dio heroku postgres ad on 
     port: Number(enviroment.DB_PORT),
     username: enviroment.DB_USERNAME,
     password: enviroment.DB_PASSWORD,
@@ -13,7 +13,7 @@ export async function connect() {
     //extra:{ssl:true},
     entities: [path.join(__dirname, "../entity/**/**.ts")],
     synchronize: true,
-    ssl: { rejectUnauthorized: false }
+    //ssl: { rejectUnauthorized: false }
     
   });
   
