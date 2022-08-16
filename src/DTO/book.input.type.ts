@@ -5,7 +5,7 @@ import { Author } from "../entity/author.entity";
 @InputType()
 export class BookInput {
   @Field()
-  @Length(3, 64)
+  @Length(1, 64)
   title!: string;
 
   @Field()
@@ -21,7 +21,7 @@ export class BookIdInput {
 @InputType()
 export class BookUpdateInput {
   @Field(() => String, { nullable: true })
-  @Length(3, 64)
+  @Length(1, 64)
   title?: string;
 
   @Field(() => Number, { nullable: true })
@@ -31,7 +31,7 @@ export class BookUpdateInput {
 @InputType()
 export class BookUpdateParsedInput {
   @Field(() => String, { nullable: true })
-  @Length(3, 64)
+  @Length(1, 64)
   title?: string;
 
   @Field(() => Author, { nullable: true })
@@ -50,6 +50,6 @@ export class TookAndPutBookInput {
 @InputType()
 export class TitlieInput {
   @Field(() => String)
-  @Length(3, 64)
+  @Length(1, 64)
   title!: string;
 }
