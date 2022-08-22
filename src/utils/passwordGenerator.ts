@@ -82,7 +82,7 @@ const generarPassword = () => {
     //control para usar 3 may, 3 min y 3 num
     if (index < 1) {
       //control para solo usar 1 símbolo
-      password.push(symbols[Math.floor(Math.random() * 30)]);
+      password.push(symbols[Math.floor(Math.random() * 14)]);
     }
     password.push(numbers[Math.floor(Math.random() * 10)]);
     password.push(lowerCase[Math.floor(Math.random() * 26)]);
