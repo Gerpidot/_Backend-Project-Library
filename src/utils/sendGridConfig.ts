@@ -212,7 +212,7 @@ export const sendMailAtLoanBook = (email: string, book: any) => {
 
   const msg = {
     to: `${email}`,
-    from: enviroment.SENDGRID_REGISTERED_EMAIL,
+    from: "gpidote@inidep.edu.ar",
     subject: "Biblioteca OnLine -Se te prestó el libro " + book.title,
     text: "Préstamo",
     html: `<strong><pre>Hola,
@@ -249,7 +249,7 @@ export const sendMailAtGiveBackBook = (email: string, book: any) => {
 
   const msg = {
     to: `${email}`,
-    from: enviroment.SENDGRID_REGISTERED_EMAIL,
+    from: "gpidote@inidep.edu.ar",
     subject: "Biblioteca OnLine -Se devolvió el libro " + book.title,
     text: "Devolución",
     html: `<strong><pre>Hola,
