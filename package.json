@@ -6,7 +6,7 @@
   
   "scripts": {
     
-    "start":"ts-node-esm src/main.ts ",
+    "start":"node --loader ts-node/esm src/main.ts ",
     "dev": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/main.ts"
   },
   "keywords": [
