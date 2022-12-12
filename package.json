@@ -6,7 +6,7 @@
   
   "scripts": {
     "startBorrarme": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/main.ts"
-    "start":"node index.js"
+    "start":"node main.ts"
   },
   "keywords": [
     "backend",
